@@ -56,6 +56,9 @@
     <Reference Include="MTRSerial">
       <HintPath>..\..\MTRSerial\MTRSerial\bin\Debug\netstandard2.0\MTRSerial.dll</HintPath>
     </Reference>
+    <Reference Include="STM32Library">
+      <HintPath>..\..\STM32Library\STM32Library\bin\Release\STM32Library.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.AppContext.4.1.0\lib\net46\System.AppContext.dll</HintPath>
