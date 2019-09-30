@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using MiniEmitResults.UI;
+using MiniEmitResults.ValueObjects;
 using MTRSerial;
 using MTRSerial.Enumerations;
 using MTRSerial.ValueObjects;
@@ -109,7 +110,7 @@ namespace MiniEmitResults
         public void SerialCommunication(object sender, EventArgs e)
         {
             var command = (MTRCommandEventArgs) e;
-            BeginInvoke(new MethodInvoker(delegate { richTextBox2.Text = command.Command + " " + command.Data; }));
+            BeginInvoke(new MethodInvoker(delegate { richTextBox_info.Text = command.Command + " " + command.Data; }));
         }
         
         private void btn_OpenSerialPort_Click(object sender, EventArgs e)
@@ -132,7 +133,7 @@ namespace MiniEmitResults
             var results = ReadResultsFromFile();
             var tempResult = new Result();
             tempResult.EmitCardNumber = 999999;
-            tempResult.Name = "Temp";
+            tempResult.CompetitorName = "Temp";
             tempResult.Time = time;
             results.Add(tempResult);
 
@@ -163,7 +164,7 @@ namespace MiniEmitResults
                     results.Add(new Result()
                     {
                         Time = int.Parse(resultRow[1]),
-                        Name = resultRow[2],
+                        CompetitorName = resultRow[2],
                         EmitCardNumber = int.Parse(resultRow[3])
                     });
 
@@ -171,7 +172,7 @@ namespace MiniEmitResults
                 }
                 catch (Exception e)
                 {
-                    richTextBox2.Text = e.Message;
+                    richTextBox_info.Text = e.Message;
                 }
             }
 
@@ -207,7 +208,7 @@ namespace MiniEmitResults
             }
             catch (Exception e)
             {
-                richTextBox2.Text = e.Message;
+                richTextBox_info.Text = e.Message;
             }
 
         }
@@ -250,11 +251,5 @@ namespace MiniEmitResults
             var course = new NewCourse();
             course.ShowDialog();
         }
-    }
-    public class Result
-    {
-        public int Time { get; set; }
-        public string Name { get; set; }
-        public int EmitCardNumber { get; set; }
     }
 }

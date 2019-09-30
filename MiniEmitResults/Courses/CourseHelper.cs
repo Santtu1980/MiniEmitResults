@@ -37,7 +37,7 @@ namespace MiniEmitResults.Courses
                 OrderNumber = 0,
                 Length_m = length,
                 Name = name,
-                CheckPoints = controls
+                ControlPoints = controls
             };
         }
         public static void CheckCourses(MTRResponse emitData)
