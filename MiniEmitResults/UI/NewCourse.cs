@@ -4,9 +4,12 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MiniEmitResults.Courses;
+using MiniEmitResults.ValueObjects;
 
 namespace MiniEmitResults.UI
 {
@@ -49,9 +52,21 @@ namespace MiniEmitResults.UI
 
             var checkPoints = inputCheckPoints.Split(',').Select(Int32.Parse).ToList();
 
+            var newCourse = CourseHelper.CreateACourseFromControlPointNumbers(checkPoints, courseLength_m, inputCourseName);
 
             //Create XML file
-            var foo = 1;
+            WriteCoursesToXML(newCourse);
+        }
+
+        public static void WriteCoursesToXML(Course course)
+        {
+            System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof(Course));
+
+            var path = "C:\\Temp\\Course.xml";
+            System.IO.FileStream file = System.IO.File.Create(path);
+
+            writer.Serialize(file, course);
+            file.Close();
         }
 
         private bool IsDigitsOrDotsOnly(string str)
